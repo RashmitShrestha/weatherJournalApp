@@ -2,7 +2,7 @@
 // Personal API Key for OpenWeatherMap API
 
 const apiKey = 'ddd366c23ce3e78e3550837db5c4410c';
-const apiURL = 'http://api.openweathermap.org/data/2.5/weather?zip='
+const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip='
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
@@ -16,7 +16,7 @@ function performAction(e) {
     const feelText = document.getElementById('feelings').value;
 
     // get the API data
-    getApiData(apiURL, document.getElementById('zip').value, apiKey)
+    getApiData(baseURL, document.getElementById('zip').value, apiKey)
     .then(function (APItemperature) {
         postData('/add', { temperature: APItemperature, date: newDate, userResponse: feelText });
     })
@@ -29,8 +29,8 @@ function performAction(e) {
 
 //Friend helped with me with get API data
 /* Function to GET Web API Data*/
-const getApiData = async (apiURL, zip, key) => {
-    const response = await fetch(apiURL + zip + ',us&appid=' + key);
+const getApiData = async (baseURL, zip, key) => {
+    const response = await fetch(baseURL + zip + ',us&appid=' + key);
     try {
         const webData = await response.json();
         APItemperature = webData.main.temp;
@@ -96,7 +96,7 @@ const updateUI = async () => {
         const allData = await request.json()
         const recRec = allData[allData.length - 1];
         document.getElementById('date').innerHTML = 'Date: ' + recRec.date;
-        document.getElementById('temp').innerHTML = 'Temperature: ' + ((recRec.temperature * 1.8) - 459.67);
+        document.getElementById('temp').innerHTML = 'Temperature: ' + Math.round((recRec.temperature*1.8) - 459.7) + '&#8457;';
         document.getElementById('content').innerHTML = 'Thoughts: ' + recRec.userResponse;
     }catch(error){
         console.log("error",error)
