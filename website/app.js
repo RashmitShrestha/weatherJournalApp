@@ -15,7 +15,7 @@ document.getElementById('generate').addEventListener('click', performAction);
 function performAction(e) {
     const feelText = document.getElementById('feelings').value;
 
-    // get the API data
+    // Friends helped with getting API data
     getApiData(apiURL, document.getElementById('zip').value, apiKey)
     .then(function (APItemperature) {
         postData('/add', { temperature: APItemperature, date: newDate, userResponse: feelText });
@@ -78,7 +78,6 @@ const retrieveData = async (url='') =>{
     try {
     // Transform into JSON
     const allData = await request.json()
-    return allData
     }
     catch(error) {
       console.log("error", error);
@@ -98,6 +97,7 @@ const updateUI = async () => {
         document.getElementById('date').innerHTML = 'Date: ' + recRec.date;
         document.getElementById('temp').innerHTML = 'Temperature: ' + Math.round((recRec.temperature*1.8) - 459.7) + '&#8457;';
         document.getElementById('content').innerHTML = 'Thoughts: ' + recRec.userResponse;
+    
     }catch(error){
         console.log("error",error)
     }
