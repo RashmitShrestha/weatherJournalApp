@@ -1,6 +1,6 @@
 /* Global Variables */
 // Personal API Key for OpenWeatherMap API
-
+//w3Sschool and Stack Overflow helped with the code and underestanding
 const apiKey = 'ddd366c23ce3e78e3550837db5c4410c';
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip='
 // Create a new date instance dynamically with JS
