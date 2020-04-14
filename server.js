@@ -21,7 +21,7 @@ app.use(cors());
 /* Initialize the main project folder*/
 app.use(express.static('website'));
 //Decided to use an uncommon port for expiremental purposes
-const port = 5000;
+const port = 8000;
 /* Spin up the server*/
 const server = app.listen(port, listening);
  function listening(){
@@ -39,8 +39,7 @@ function sendData (request, response) {
 // POST route
 //Combine the two POSTS Functions into one
 app.post('/add', callBack);
-
 function callBack (req,res){
-    projectData.push(req.body);
-    res.send(true);
+  Object.assign(projectData,req.body);
+  res.send(true);
 };

@@ -18,19 +18,19 @@ function performAction(e) {
     // Friends helped with getting API data
     getApiData(apiURL, document.getElementById('zip').value, apiKey)
     .then(function (APItemperature) {
+
         postData('/add', { temperature: APItemperature, date: newDate, userResponse: feelText });
+
     })
-    .then(
-        updateUI()
-      )
-
-
+    .then(function (){
+        updateUI();
+        })
 }
 
 //Friend helped with me with get API data
 /* Function to GET Web API Data*/
-const getApiData = async (apiURL, zip, key) => {
-    const response = await fetch(apiURL + zip + ',us&appid=' + key);
+const getApiData = async (apiURL, zip, apiKey) => {
+    const response = await fetch(apiURL + zip + ',us&appid=' + apiKey);
     try {
         const webData = await response.json();
         APItemperature = webData.main.temp;
@@ -47,10 +47,27 @@ const getApiData = async (apiURL, zip, key) => {
 
 
 
+/* Function to GET Project Data */
+//Help From "Async GET"
+const retrieveData = async (url='') =>{ 
+    const request = await fetch(url);
+    try {
+    // Transform into JSON
+    const allData = await request.json()
+    }
+    catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+    }
+  };
+
+
+
+
+
 
 
 /* Function to POST data */
-//Help From "Async GET"
 const postData = async ( url = '', data = {})=>{
 
     const response = await fetch(url, {
@@ -71,29 +88,15 @@ const postData = async ( url = '', data = {})=>{
 };
 
 
-/* Function to GET Project Data */
-//Help From "Async GET"
-const retrieveData = async (url='') =>{ 
-    const request = await fetch(url);
-    try {
-    // Transform into JSON
-    const allData = await request.json()
-    }
-    catch(error) {
-      console.log("error", error);
-      // appropriately handle the error
-    }
-  };
-
-
 //Update the index page
 //Help From "Updating UI Elements"
 //THis is all the way in the bottom
 const updateUI = async () => {
     const request = await fetch('/all')
+
     try{
-        const allData = await request.json()
-        const recRec = allData[allData.length - 1];
+        const recRec = await request.json();
+        console.log(recRec);
         document.getElementById('date').innerHTML = 'Date: ' + recRec.date;
         document.getElementById('temp').innerHTML = 'Temperature: ' + Math.round((recRec.temperature*1.8) - 459.7) + '&#8457;';
         document.getElementById('content').innerHTML = 'Thoughts: ' + recRec.userResponse;
