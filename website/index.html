@@ -11,31 +11,47 @@
 <body>
 
   <div id="app">
-
     <div class="holder headline">
       Weather Journal App
     </div>
-
     <div class="holder zip">
       <label for="zip">Enter Zipcode here</label>
-      <input type="text" id="zip" placeholder="enter zip code here">
+      <input type="text" id="input1" placeholder="enter zip code here">
     </div>
-
     <div class="holder feel">
       <label for="feelings">What are your thoughts on today?</label>
       <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
-      <button id="generate" type="submit"> Generate </button>
-    </div>
+      <button id="generate1" type="submit"> Generate </button>
+      <button id="generate2" type="submit"> Generate </button>
 
+   
+      <p class = "text" style = 'font-size: 50px;'>Start Date: </p>
+      <input id="input2"
+             placeholder="dd/mm/yyyy"
+             type="date">
+
+      <p class = "text" style = 'font-size: 50px;'>End Date: </p>
+      <input id="input3"
+             placeholder="dd/mm/yyyy"
+             type="date">
+   
+  
+    </div>
     <div class="holder entry">
       <div class="title">Most Recent Entry</div>
       <div id="entryHolder">
-        <div id="date"></div>
-        <div id="temp"></div>
-        <div id="content"></div>
+        <p style="display: none;" id="lat"></p>
+        <p style="display: none;" id="lon"></p>
+        <p style="display: none;" id="place"></p>
+
+        <div id="maxtemp"></div>
+        <div id="mintemp"></div>
+        <div id="precip"></div>
+
+    <img id="imagep" style="border: 3px solid olivedrab;">
+    
       </div>
     </div>
-
   </div>
 
   <script src="app.js" type="text/javascript"></script>
